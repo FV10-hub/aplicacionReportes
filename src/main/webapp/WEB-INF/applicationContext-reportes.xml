@@ -13,8 +13,11 @@
         http://www.springframework.org/schema/data/jpa
     	https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-	<!-- ::::::::::::: IMPORTANDO ARCHIVOS SPRING CONTEXT ENTRE PROYECTOS ::::::::: -->
+	<!-- ::::::::::::: CONFIGURANDO ANOTACIONES CON SPRING ::::::::: -->
 
-	<import resource="classpath:config/applicationContext-data.xml"/>
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="py.com.aplicacion"></context:component-scan>
+	
+	<context:property-placeholder location="classpath*:config/application-reportes.properties"/>
 
 </beans>
