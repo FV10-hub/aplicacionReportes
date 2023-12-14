@@ -51,7 +51,7 @@ public class ReportesWs {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response downloadReport(ParametrosReporte params) throws ClassNotFoundException {
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss:SSS");
 			String nombreArchivo = params.getReporte() + sdf.format(System.currentTimeMillis());
 			// Generar el informe y construir la respuesta
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -62,9 +62,11 @@ public class ReportesWs {
             if ("PDF".equalsIgnoreCase(params.getFormato())) {
                 responseBuilder.header("Content-Disposition", "attachment; filename="+nombreArchivo+".pdf");
                 responseBuilder.header("Content-Type", "application/pdf");
+                responseBuilder.header("Content-Length", response.length);
             } else if ("XLS".equalsIgnoreCase(params.getFormato())) {
                 responseBuilder.header("Content-Disposition", "attachment; filename="+nombreArchivo+".xlsx");
                 responseBuilder.header("Content-Type", "application/vnd.ms-excel");
+                responseBuilder.header("Content-Length", response.length);
                 // Agregar otros encabezados específicos para Excel si es necesario
             }
          
