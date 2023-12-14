@@ -8,6 +8,7 @@ import java.util.List;
 public class ParametrosReporte {
 	private String codModulo;
 	private String reporte;
+	private String formato;
 	private List<String> parametros;
 	private List<Object> valor;
 	
@@ -48,5 +49,12 @@ public class ParametrosReporte {
 		this.reporte = reporte;
 	}
 
+	public String getFormato() {
+		return formato;
+	}
+
+	public void setFormato(String formato) {
+		this.formato = formato;
+	}
 	
 }

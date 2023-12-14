@@ -18,8 +18,6 @@ public class DataSourceConfiguration {
     @Value("${spring.datasource.password}")
     private String password;
 
-    @Value("${spring.datasource.driverClassName}")
-    private String driverClassName;
 
     public String getUrl() {
         return url;
@@ -31,9 +29,5 @@ public class DataSourceConfiguration {
 
     public String getPassword() {
         return password;
-    }
-
-    public String getDriverClassName() {
-        return driverClassName;
     }
 }
