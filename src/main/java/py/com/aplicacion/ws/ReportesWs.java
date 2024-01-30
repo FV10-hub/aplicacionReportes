@@ -62,11 +62,15 @@ public class ReportesWs {
 			// Configurar los encabezados según una condición
             Response.ResponseBuilder responseBuilder = Response.ok(response);
             if ("PDF".equalsIgnoreCase(params.getFormato())) {
+            	//TODO: comento esto para que el archivo se descargue directamente
                 responseBuilder.header("Content-Disposition", "attachment; filename="+nombreArchivo+".pdf");
+            	//responseBuilder.header("Content-Disposition", "inline; filename="+nombreArchivo+".pdf");
                 responseBuilder.header("Content-Type", "application/pdf");
                 responseBuilder.header("Content-Length", response.length);
             } else if ("XLS".equalsIgnoreCase(params.getFormato())) {
+            	//TODO: comento esto para que el archivo se descargue directamente
                 responseBuilder.header("Content-Disposition", "attachment; filename="+nombreArchivo+".xlsx");
+            	//responseBuilder.header("Content-Disposition", "inline; filename="+nombreArchivo+".xlsx");
                 responseBuilder.header("Content-Type", "application/vnd.ms-excel");
                 responseBuilder.header("Content-Length", response.length);
                 // Agregar otros encabezados específicos para Excel si es necesario
