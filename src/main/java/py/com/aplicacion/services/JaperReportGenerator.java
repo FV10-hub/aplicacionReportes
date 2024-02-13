@@ -60,14 +60,22 @@ public class JaperReportGenerator {
 			if (param.getValores().get(pos) instanceof Date)
 				parametros.put(param.getParametros().get(pos), (Date) param.getValores().get(pos));
 
-			if (param.getValores().get(pos) instanceof Integer)
-				parametros.put(param.getParametros().get(pos), (Integer) param.getValores().get(pos));
-
+			if (param.getValores().get(pos) instanceof Long) {
+				Long valor = (Long) param.getValores().get(pos);
+				// Si valor es null, pasamos null, de lo contrario, pasamos el valor Long
+				parametros.put(param.getParametros().get(pos), (valor != null) ? valor : null);
+			}
+			
+			if (param.getValores().get(pos) instanceof Integer) {
+				//TODO: comentado por que en alguna parte el servicio hace un cast automatico
+				//parametros.put(param.getParametros().get(pos), (Integer) param.getValores().get(pos));
+				Integer valor = (Integer) param.getValores().get(pos);
+				// Si valor es null, pasamos null, de lo contrario, pasamos el valor Long
+				parametros.put(param.getParametros().get(pos), (valor != null) ? valor.longValue() : null);
+			}	
+			
 			if (param.getValores().get(pos) instanceof Double)
 				parametros.put(param.getParametros().get(pos), (Double) param.getValores().get(pos));
-
-			if (param.getValores().get(pos) instanceof Long)
-				parametros.put(param.getParametros().get(pos), (Long) param.getValores().get(pos));
 
 			if (param.getValores().get(pos) instanceof BigDecimal)
 				parametros.put(param.getParametros().get(pos), (BigDecimal) param.getValores().get(pos));
@@ -78,7 +86,8 @@ public class JaperReportGenerator {
 
 		String format = param.getFormato();
 
-		try (InputStream inputStream = new FileInputStream(this.getAbsolutPath(param.getReporte(),param.getCodModulo()))) {
+		try (InputStream inputStream = new FileInputStream(
+				this.getAbsolutPath(param.getReporte(), param.getCodModulo()))) {
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(inputStream);
 
 			// Se asignan los parametros de conexion para el archivo de jasper.
@@ -86,7 +95,7 @@ public class JaperReportGenerator {
 			Connection connection = DriverManager.getConnection(this.url, this.user, this.password);
 
 			// Rellenar el informe con los parámetros proporcionados
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros,connection);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, connection);
 
 			byte[] reportBytes;
 			if (format.equalsIgnoreCase("PDF")) {
@@ -116,9 +125,10 @@ public class JaperReportGenerator {
 		}
 	}
 
-	private String getAbsolutPath(String reportName,String modulo) {
+	private String getAbsolutPath(String reportName, String modulo) {
 		String separator = File.separator;
-		String reportPath = Constantes.CARPETA_REPORTES_WINDOWS + separator + modulo + separator +reportName + ".jasper";
+		String reportPath = Constantes.CARPETA_REPORTES_WINDOWS + separator + modulo + separator + reportName
+				+ ".jasper";
 		return reportPath;
 	}
 }
