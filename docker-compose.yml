@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  capitalsys-reportes:
+    build: .
+    container_name: capitalsys-reportes
+    env_file:
+      - ./.env
+    ports:
+      - "8080:8080"
+    volumes:
+      - reportes-data:/app/jasper
+    networks:
+      - spring
+
+volumes:
+  reportes-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: D:\reportes
+          
+networks:
+  spring:
+    name: spring
+    external: true      

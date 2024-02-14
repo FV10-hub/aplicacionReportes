@@ -129,6 +129,7 @@ public class JaperReportGenerator {
 		String separator = File.separator;
 		String reportPath = Constantes.CARPETA_REPORTES_WINDOWS + separator + modulo + separator + reportName
 				+ ".jasper";
+		System.out.println("PATH QUE CONSULTO :::: "+reportPath);
 		return reportPath;
 	}
 }
