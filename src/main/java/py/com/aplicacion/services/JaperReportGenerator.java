@@ -95,7 +95,7 @@ public class JaperReportGenerator {
 			Connection connection = DriverManager.getConnection(this.url, this.user, this.password);
 
 			// Rellenar el informe con los parámetros proporcionados
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, connection);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, param.getParametrosMapa(), connection);
 
 			byte[] reportBytes;
 			if (format.equalsIgnoreCase("PDF")) {

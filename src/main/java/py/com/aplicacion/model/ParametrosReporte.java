@@ -6,6 +6,7 @@ package py.com.aplicacion.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /*
 * 14 dic. 2023 - Elitebook
@@ -17,6 +18,7 @@ public class ParametrosReporte {
 	private String formato;
 	private List<String> parametros;
 	private List<Object> valores;
+	private Map<String, Object> parametrosMapa;
 	
 	public ParametrosReporte() {
 		parametros = new ArrayList<String>();
@@ -62,6 +64,15 @@ public class ParametrosReporte {
 	public void setFormato(String formato) {
 		this.formato = formato;
 	}
+
+	public Map<String, Object> getParametrosMapa() {
+		return parametrosMapa;
+	}
+
+	public void setParametrosMapa(Map<String, Object> parametrosMapa) {
+		this.parametrosMapa = parametrosMapa;
+	}
+	
 	
 }
 
